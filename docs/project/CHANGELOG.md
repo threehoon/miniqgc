@@ -11,10 +11,11 @@
 - 文档与目录框架：`AGENTS.md`、`docs/project/*`、`docs/modules/*`、`docs/learning/*`、`docs/decisions/*`
 - QGC 参考路径约定：`docs/REFERENCE.md`
 - 源码/测试/CMake 占位目录（无业务实现）
+- 实现侧交接单 `docs/project/CURRENT.md`；默认学法「设计课 → 作业本」
 
 ### Changed
 
-- （无）
+- M-doc 标为完成；进度/里程碑/AGENTS 与学法同步
 
 ### Fixed
 

@@ -88,11 +88,21 @@ miniqgc/
 └── docs/                  # 架构 · 进度 · 模块 · 学习 · 决策
 ```
 
+## 默认学法
+
+```text
+设计课（qgc_project）→ 复述过关 → 本仓自己实现 → 对照收口
+```
+
+新对话先读：**[docs/project/CURRENT.md](docs/project/CURRENT.md)**。  
+设计课交接：参考仓 `docs/learning/CURRENT.md`。
+
 ## 文档导航
 
 | 你想… | 去这里 |
 |--------|--------|
-| 看现在做到哪 | [docs/project/PROGRESS.md](docs/project/PROGRESS.md) |
+| 看现在做到哪（交接） | [docs/project/CURRENT.md](docs/project/CURRENT.md) |
+| 看进度详情 | [docs/project/PROGRESS.md](docs/project/PROGRESS.md) |
 | 看里程碑怎么验收 | [docs/project/MILESTONES.md](docs/project/MILESTONES.md) |
 | 记问题 / 风险 | [docs/project/ISSUES.md](docs/project/ISSUES.md) |
 | 查模块职责 | [docs/modules/](docs/modules/) |

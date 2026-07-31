@@ -1,33 +1,42 @@
-# Learning system — MiniGCS × QGC
+# 学习体系 — MiniQGC × QGC
 
-在 **实现 Mini** 的同时 **对照 QGC** 学习。实现进度看 `docs/project/`；这里管「学到了什么」。
+本仓是 **作业本 / 产品实现**。  
+**设计课**（探讨设计、为什么、带读 QGC）在参考仓：
 
-## 四步（每个竖切固定）
+`../qgc_project/docs/learning/`（本机：`/Users/x_hoon/qgc_project/docs/learning/`）
+
+## 默认学法（与设计课同步）
 
 ```text
-① 业务导读 → ② 场景与边界 → ③ Mini 实现 → ④ 对照 QGC 笔记
+① 设计课（qgc_project）→ ② 你在本仓实现 → ③ 对照收口 → 更新进度
 ```
 
-禁止只写代码不写对照（除非 PROGRESS 里注明跳过原因）。
+- 设计课未复述过关前，**不要急着在本仓堆业务代码**（脚手架/文档除外）。  
+- 实现用**自己的理解**；卡住说清卡点，避免整模块代写。  
+- 对照笔记建议写在本仓 `notes/`；长篇设计课可留在 QGC 仓 notes。
+
+## 进度权威（新对话）
+
+| 文件 | 作用 |
+|------|------|
+| **[../project/CURRENT.md](../project/CURRENT.md)** | **实现侧交接单**（做到哪个里程碑） |
+| [../project/PROGRESS.md](../project/PROGRESS.md) | 实现进度详情 |
+| QGC 仓 `docs/learning/CURRENT.md` | 设计课 / 学法侧交接 |
 
 ## 文件
 
 | 文件 | 作用 |
 |------|------|
-| [PLAN.md](PLAN.md) | 学习/实现对照总计划 |
-| [PROGRESS.md](PROGRESS.md) | 学习进度（对照理解程度） |
-| [notes/](notes/) | 分里程碑笔记 |
-
-## 与 QGC 仓旧笔记
-
-`../qgc_project/docs/learning/` 里可能已有阶段 0/1 笔记。  
-**建议**：新的对照笔记写在本仓；旧笔记可继续当业务参考，不强制迁移。
-
-待决：见 [../project/ISSUES.md](../project/ISSUES.md) ISS-002。
+| [PLAN.md](PLAN.md) | 与设计课阶段对照 |
+| [PROGRESS.md](PROGRESS.md) | 对照理解程度（学到了什么） |
+| [notes/](notes/) | 实现后的对照笔记 |
 
 ## 口令
 
 | 口令 | 作用 |
 |------|------|
-| `对照 QGC` | 当前里程碑带读参考仓并写 notes |
-| `复述` | 自讲业务 + Mini 落点 + QGC 入口 |
+| `进度` | 读 project/CURRENT + 设计课 CURRENT |
+| `做 Mn` | 仅当设计课已过关或用户明确要求实现 |
+| `对照 QGC` | 带读参考仓并写 notes |
+| `复述` | 自讲业务 + 本仓落点 + QGC 入口 |
+| `更新进度` | 更新 project/CURRENT、PROGRESS、本 learning 进度 |

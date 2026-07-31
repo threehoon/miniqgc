@@ -2,6 +2,8 @@
 
 功能按竖切里程碑交付。每个里程碑必须：**可演示 + 文档更新 + 不破坏模块边界**。
 
+**学法**：设计课（qgc_project）过关 → 本仓实现 → 收口。见根目录 [AGENTS.md](../../AGENTS.md)。
+
 ## Status legend
 
 | 标记 | 含义 |
@@ -17,11 +19,9 @@
 
 | 项 | 内容 |
 |----|------|
-| Status | `active` → 完成后标 `done` |
+| Status | `done` |
 | Goal | 独立仓库、Git、Agent 文档、项目管理 MD、占位目录 |
-| In scope | README、AGENTS、docs/*、src/*/README 占位、.gitignore |
-| Out of scope | 任何业务 C++/QML 实现、CMake 可构建工程 |
-| Acceptance | 目录可导航；进度/问题/模块文档齐；Git 仓库已初始化 |
+| Acceptance | 目录可导航；进度/问题/模块文档齐；已推送 GitHub |
 
 ---
 
@@ -29,12 +29,13 @@
 
 | 项 | 内容 |
 |----|------|
-| Status | `todo` |
-| Goal | CMake + Qt 工程可配置；空窗口或最小 `Application` 能启动 |
+| Status | `todo`（等设计课） |
+| Goal | CMake + Qt 工程可配置；空窗口或最小 Application 能启动 |
 | In scope | 顶层 CMake、presets、`apps/minigcs`、`mini_core`/`mini_app` 空目标 |
 | Out of scope | 通信、MAVLink、真飞数据 |
-| Acceptance | 本机一条命令配置+编译+启动成功；`PROGRESS` 更新 |
+| Acceptance | 本机一条命令配置+编译+启动成功；CURRENT/PROGRESS 更新 |
 | QGC 对照 | `main.cc`、`QGCApplication`、根 CMake |
+| 设计课 | qgc_project：为什么这样拆模块 / 启动链职责 |
 
 ---
 
@@ -112,9 +113,9 @@
 
 ## Definition of Done（每个里程碑通用）
 
-1. 验收标准全部满足  
-2. [PROGRESS.md](PROGRESS.md) 已更新  
-3. 相关 [modules/](../modules/) 契约已写或修订  
-4. 有对照笔记（[learning/notes/](../learning/notes/)）或明确写「本里程碑跳过对照及原因」  
-5. 无新增 ISSUES 未登记的已知坑  
-6. Git 有清晰 commit  
+1. 设计课要点已复述（或用户书面确认跳过）  
+2. 验收标准全部满足  
+3. [CURRENT.md](CURRENT.md) 与 [PROGRESS.md](PROGRESS.md) 已更新  
+4. 相关 [modules/](../modules/) 契约已写或修订  
+5. 有对照笔记（[learning/notes/](../learning/notes/)）或明确跳过理由  
+6. Git 有清晰 commit（需要时 push）  
