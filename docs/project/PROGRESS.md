@@ -6,9 +6,9 @@
 
 | 项 | 值 |
 |----|-----|
-| **当前里程碑** | **M0 done** → 下一步 M1 |
-| **整体进度（粗估）** | ~12% |
-| **最近更新** | 2026-07-31 — M0 空壳可运行 |
+| **当前里程碑** | **M1 done** → 下一步 M2 |
+| **整体进度（粗估）** | ~18% |
+| **最近更新** | 2026-07-31 — M1 Shell UI |
 | **GitHub** | https://github.com/threehoon/miniqgc |
 
 ## Milestone board
@@ -18,18 +18,17 @@
 | M-doc | 文档与目录框架 | **done** |
 | Patterns | P1–P8 + CODING_STYLE | **done** |
 | M0 | CMake + 空壳 App | **done** |
-| M1 | Shell UI | todo |
-| M2–M6 | … | todo |
+| M1 | Shell UI | **done** |
+| M2 | Comms bytes | todo |
+| M3–M6 | … | todo |
 
 ## Completed
 
-- [x] AGENTS / ARCHITECTURE_PATTERNS / CODING_STYLE  
-- [x] `mini_core` 日志  
-- [x] `mini_app::Application` 调度根（P6）  
-- [x] `minigcs` + QML 模块 `MiniQGC` / `Main.qml`  
-- [x] 本机构建与 offscreen 冒烟  
+- [x] 规范 P1–P8 + CODING_STYLE  
+- [x] M0 启动链  
+- [x] M1 四页导航壳（Fly/Plan/Analyze/Settings）  
 
 ## Next
 
-- M1 Shell UI  
-- M0 对照笔记（可选）  
+- M2 UDP / Link 抽象  
+

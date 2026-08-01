@@ -7,15 +7,14 @@
 
 ### Added
 
-- 独立仓库初始化（`main`）
-- 文档与目录框架、CURRENT、ARCHITECTURE_PATTERNS（P1–P8）
-- **M0**：`mini_core` / `mini_app` / `minigcs`、Application、Main.qml、CMake presets
-- CODING_STYLE 强制版、`.clang-format`
-- 对照笔记 `docs/learning/notes/m0-bootstrap.md`
+- 规范与 M0 启动链（见历史）
+- **M1**：Fly/Plan/Analyze/Settings 顶栏切换 + 占位页
+- 笔记 `m1-shell-ui.md`；`docs/modules/ui.md`
+- `QQuickStyle::Fusion` 避免 macOS 原生控件定制警告
 
 ### Changed
 
-- AGENTS 构建命令改为真实 preset；M0 标为完成
+- `Main.qml` 从 M0 单页升级为导航壳
 
 ### Fixed
 

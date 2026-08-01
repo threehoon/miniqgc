@@ -6,7 +6,7 @@
 
 ## 一句话状态
 
-**规范 P1–P8 + CODING_STYLE 已落地；M0 空壳已实现并通过本机构建与 QML 加载冒烟。下一里程碑 M1（Shell UI）或按设计课继续。**
+**M0 + M1 已完成：启动链 + 主窗四页切换（Fly/Plan/Analyze/Settings 占位）。下一刀倾向 M2 通信（UDP 字节）。**
 
 ---
 
@@ -15,33 +15,27 @@
 | 项 | 值 |
 |----|-----|
 | 仓库 | https://github.com/threehoon/miniqgc |
-| 本机路径 | `/Users/x_hoon/minigcs` |
-| 金科玉律 | [../ARCHITECTURE_PATTERNS.md](../ARCHITECTURE_PATTERNS.md) |
-| Agent | [../../AGENTS.md](../../AGENTS.md) |
-| 风格 | [../CODING_STYLE.md](../CODING_STYLE.md) |
-| 设计课 | `../qgc_project/docs/learning/CURRENT.md` |
+| 本机 | `/Users/x_hoon/minigcs` |
+| 金律 | `docs/ARCHITECTURE_PATTERNS.md` |
+| 笔记 | `docs/learning/notes/m1-shell-ui.md` |
 
 ---
 
-## 当前焦点
+## 里程碑
 
-| 项 | 值 |
-|----|-----|
-| **M-doc** | ✅ |
-| **Architecture Patterns** | ✅ P1–P8 |
-| **CODING_STYLE** | ✅ M0 强制版 |
-| **M0** | ✅ 可配置 / 编译 / 加载主窗 |
-| **M1** | ⬜ 未开始 |
+| ID | 状态 |
+|----|------|
+| M0 启动空壳 | ✅ |
+| M1 Shell UI | ✅ |
+| M2 Comms bytes | ⬜ 下一步 |
 
-### M0 验收
+### M1 验收
 
-- [x] CMake targets：`mini_core`、`mini_app`、`minigcs`  
-- [x] `main` → `Application::init` → `loadFromModule(MiniQGC, Main)` → `exec`  
-- [x] 分类日志 `mini.app` / `mini.core`  
-- [x] 本机 `cmake --preset macos-qt6 && cmake --build --preset macos-qt6`  
-- [x] offscreen 冒烟：`init: root UI ready`  
-
-运行：
+- [x] 顶栏 Fly / Plan / Analyze / Settings  
+- [x] `StackLayout` 切换，标题与底栏同步  
+- [x] 底栏提示无 vehicle（P2）  
+- [x] 构建 + 冒烟加载成功  
+- [x] Fusion 样式避免 macOS 原生控件定制警告  
 
 ```bash
 cmake --preset macos-qt6 && cmake --build --preset macos-qt6
@@ -52,15 +46,13 @@ cmake --preset macos-qt6 && cmake --build --preset macos-qt6
 
 ## 下一步
 
-1. M1 设计课：主窗信息架构 / 假页面切换  
-2. 或补 `docs/learning/notes/m0-bootstrap.md` 对照 QGC 启动链  
-3. 需要时把 `CMakePresets` 中 Qt 路径改为可移植写法  
+1. **M2 设计/实现**：`comms` 模块 UDP 收字节 + 日志（仍由 Application 创建接线，P6）  
+2. 可选：把 Analyze/Settings 改成 QGC 式抽屉（非必须）  
 
 ---
 
 ## 最近会话
 
-| 项 | 内容 |
-|----|------|
-| 日期 | 2026-07-31 |
-| 内容 | 同步文档至 P1–P8；实现并验证 M0 |
+| 日期 | 内容 |
+|------|------|
+| 2026-07-31 | M1 主窗四页壳 + 文档 |

@@ -43,10 +43,12 @@
 
 | 项 | 内容 |
 |----|------|
-| Status | `todo` |
-| Goal | 主窗 + 假页面切换（如 Fly / Plan 占位） |
-| Acceptance | 能切换页面；UI 与 app 分层清晰 |
-| QGC 对照 | `MainWindow.qml` 编排 |
+| Status | **`done`**（2026-07-31） |
+| Goal | 主窗 + 假页面切换（Fly / Plan / Analyze / Settings） |
+| Delivered | `Main.qml` 顶栏 + StackLayout；四页占位 QML |
+| Acceptance | 能切换页面；UI 仅壳层；启动链仍在 app |
+| QGC 对照 | `MainWindow.qml`（Mini 用顶栏 Tab 简化 toolDrawer） |
+| Notes | `docs/learning/notes/m1-shell-ui.md` |
 
 ---
 

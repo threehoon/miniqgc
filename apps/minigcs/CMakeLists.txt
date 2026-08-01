@@ -2,17 +2,28 @@ qt_add_executable(minigcs
     main.cc
 )
 
-# Keep sources under repo qml/; alias so the module sees "Main.qml".
-set(MINI_MAIN_QML "${CMAKE_SOURCE_DIR}/qml/Main.qml")
-set_source_files_properties("${MINI_MAIN_QML}" PROPERTIES
-    QT_RESOURCE_ALIAS "Main.qml"
+# QML lives under repo qml/; aliases keep module-relative names clean.
+set(MINI_QML_DIR "${CMAKE_SOURCE_DIR}/qml")
+set(MINI_QML_FILES
+    "${MINI_QML_DIR}/Main.qml"
+    "${MINI_QML_DIR}/FlyView.qml"
+    "${MINI_QML_DIR}/PlanView.qml"
+    "${MINI_QML_DIR}/AnalyzeView.qml"
+    "${MINI_QML_DIR}/SettingsView.qml"
 )
+
+foreach(_qml_file IN LISTS MINI_QML_FILES)
+    get_filename_component(_qml_name "${_qml_file}" NAME)
+    set_source_files_properties("${_qml_file}" PROPERTIES
+        QT_RESOURCE_ALIAS "${_qml_name}"
+    )
+endforeach()
 
 qt_add_qml_module(minigcs
     URI MiniQGC
     VERSION 1.0
     QML_FILES
-        "${MINI_MAIN_QML}"
+        ${MINI_QML_FILES}
 )
 
 set_target_properties(minigcs PROPERTIES
@@ -31,7 +42,6 @@ target_link_libraries(minigcs
         Qt6::QuickControls2
 )
 
-# macOS: put next to other tooling expectations
 if(APPLE)
     set_target_properties(minigcs PROPERTIES
         MACOSX_BUNDLE_BUNDLE_NAME "MiniQGC"
