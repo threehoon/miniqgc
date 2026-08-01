@@ -12,10 +12,12 @@
 - QGC 参考路径约定：`docs/REFERENCE.md`
 - 源码/测试/CMake 占位目录（无业务实现）
 - 实现侧交接单 `docs/project/CURRENT.md`；默认学法「设计课 → 作业本」
+- **架构金科玉律** `docs/ARCHITECTURE_PATTERNS.md`（P1–P8）与 AGENTS 短列表
 
 ### Changed
 
 - M-doc 标为完成；进度/里程碑/AGENTS 与学法同步
+- AGENTS 对齐 QGC 结构：快速链接 / 金律 / Critical / DoD
 
 ### Fixed
 

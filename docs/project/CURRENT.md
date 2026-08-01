@@ -8,7 +8,7 @@
 
 ## 一句话状态
 
-**M-doc（文档与目录框架）已完成并推送 GitHub；尚无业务代码。等设计课 M0 复述过关后，再在本仓实现 M0。**
+**M-doc 完成；架构金科玉律 P1–P8 已定稿（ARCHITECTURE_PATTERNS + AGENTS）。下一步：CODING_STYLE 细则定稿 → 再 M0 实现。无业务代码。**
 
 ---
 
@@ -29,19 +29,20 @@
 
 | 项 | 值 |
 |----|-----|
-| **当前里程碑** | M-doc → 即将进入 **M0** |
+| **当前里程碑** | 规范层 → 然后 **M0** |
 | **M-doc** | ✅ 完成 |
-| **M0** | ⬜ 未开始（等设计课） |
-| **是否允许写业务代码** | 默认 **否**；学员复述过关并明确要求实现后再写 |
+| **架构模式 P1–P8** | ✅ 定稿（见 `docs/ARCHITECTURE_PATTERNS.md`） |
+| **CODING_STYLE 细则** | ⬜ 提纲有，待对齐 QGC 补全 |
+| **M0** | ⬜ 未开始 |
+| **是否允许写业务代码** | 默认 **否** |
 
 ---
 
 ## 下一步
 
-1. 学员在 **qgc_project** 完成 M0 设计课并复述  
-2. 回到本仓：CMake + 模块骨架 + 空壳可运行  
-3. 对照 QGC 启动链，写 `docs/learning/notes/m0-bootstrap.md`  
-4. 更新本 CURRENT + PROGRESS + CHANGELOG + git push  
+1. 设计课 / 本仓：定稿 **CODING_STYLE**（命名钉死、include、日志、QML）  
+2. M0 设计复述 → 实现空壳  
+3. 对照笔记 + 更新 CURRENT + push  
 
 ---
 
@@ -50,8 +51,8 @@
 | 项 | 内容 |
 |----|------|
 | 日期 | 2026-07-31 |
-| 内容 | 确认学法；增加实现侧 CURRENT；同步 learning / AGENTS |
-| GitHub | 文档框架已在 `main` |
+| 内容 | 定稿 Architecture Patterns P1–P8；重写 AGENTS 金科玉律短列表 |
+| GitHub | 随本次 docs 提交推送 |
 
 ---
 

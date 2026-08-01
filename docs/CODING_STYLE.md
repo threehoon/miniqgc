@@ -1,6 +1,8 @@
 # Coding Style — MiniGCS
 
-> Applies once application code exists. Aligned in spirit with QGC / modern Qt C++20, simplified for a small team of one + AI.
+> 代码「长什么样」。架构「不许怎样做」见 [ARCHITECTURE_PATTERNS.md](ARCHITECTURE_PATTERNS.md) 与 [AGENTS.md](../AGENTS.md)。  
+> 对齐 QGC：`CODING_STYLE` 管写法，`AGENTS` 管金律与工作流。  
+> 状态：提纲已定；与 QGC 对齐的命名/格式细节在规范定稿会话中继续补全。实现代码出现后强制执行。
 
 ## Language & toolchain
 

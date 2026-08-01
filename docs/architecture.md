@@ -3,11 +3,16 @@
 > Status: **target architecture** (scaffold phase; no runtime code yet).  
 > Changes that affect layering require an ADR in [decisions/](decisions/).
 
+**强制架构纪律（金科玉律 P1–P8）** 见  
+[ARCHITECTURE_PATTERNS.md](ARCHITECTURE_PATTERNS.md)（展开）与根目录 [AGENTS.md](../AGENTS.md)（短列表）。  
+本文只描述分层与依赖表；**与模式冲突时以 ARCHITECTURE_PATTERNS 为准**。
+
 ## Goals
 
 1. Same *mental model* as a real GCS (link → vehicle → facts → UI).
 2. Strict module boundaries so features can be added for years.
 3. Small enough to understand end-to-end in one sitting per slice.
+4. Patterns stay compatible with **QGC secondary development** judgment (not demo-only shortcuts).
 
 ## Logical layers
 
