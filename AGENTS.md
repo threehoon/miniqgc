@@ -91,16 +91,20 @@ docs/
 
 ## 构建与测试
 
-> M0 落地前下列命令为 **目标形态**；实现后改成真实 preset 名称。
-
 ```bash
-cmake --preset default          # 配置（待 M0）
-cmake --build --preset default  # 编译
-ctest --test-dir build          # 测试（有测试后）
+# 推荐（本机 Qt 路径写在 preset macos-qt6 中，可按环境修改）
+cmake --preset macos-qt6
+cmake --build --preset macos-qt6
+
+# 运行（macOS）
+./build/apps/minigcs/MiniQGC.app/Contents/MacOS/MiniQGC
+
+# 其它环境：设置 CMAKE_PREFIX_PATH 后
+cmake --preset default && cmake --build --preset default
 ```
 
 - 多文件改动时增量编译，先修红再继续。  
-- 与 CI 对齐后以文档中的 CI 命令为准。  
+- 测试：M0 尚无自动化 ctest；后续按模块补。  
 
 ---
 
@@ -160,8 +164,9 @@ Conventional Commits，例如：
 
 ## 当前实现策略
 
-- **阶段**：规范层定稿中；M-doc 完成；**无业务代码直至 M0 授权**。  
+- **阶段**：**M0 已完成**；按 P1–P8 与 CODING_STYLE 继续 M1+。  
 - 重大依赖与模式变更 → `docs/decisions/` ADR。  
+- 实现仍以学员为主；大块代写需用户明确要求。  
 
 ## 相关入口
 

@@ -29,13 +29,13 @@
 
 | 项 | 内容 |
 |----|------|
-| Status | `todo`（等设计课） |
+| Status | **`done`**（2026-07-31） |
 | Goal | CMake + Qt 工程可配置；空窗口或最小 Application 能启动 |
-| In scope | 顶层 CMake、presets、`apps/minigcs`、`mini_core`/`mini_app` 空目标 |
+| Delivered | `mini_core` / `mini_app` / `minigcs`；`Application`；`qml/Main.qml`；presets |
 | Out of scope | 通信、MAVLink、真飞数据 |
-| Acceptance | 本机一条命令配置+编译+启动成功；CURRENT/PROGRESS 更新 |
+| Acceptance | 本机 configure+build+加载主窗；CURRENT 已更新 |
 | QGC 对照 | `main.cc`、`QGCApplication`、根 CMake |
-| 设计课 | qgc_project：为什么这样拆模块 / 启动链职责 |
+| Run | `cmake --preset macos-qt6 && cmake --build --preset macos-qt6` |
 
 ---
 

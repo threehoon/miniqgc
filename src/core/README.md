@@ -2,4 +2,4 @@
 
 See [docs/modules/core.md](../../docs/modules/core.md).
 
-No sources yet (M0).
+M0: `Logging.h` / `Logging.cc`, CMake target `mini_core`.

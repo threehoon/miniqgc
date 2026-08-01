@@ -8,16 +8,14 @@
 ### Added
 
 - 独立仓库初始化（`main`）
-- 文档与目录框架：`AGENTS.md`、`docs/project/*`、`docs/modules/*`、`docs/learning/*`、`docs/decisions/*`
-- QGC 参考路径约定：`docs/REFERENCE.md`
-- 源码/测试/CMake 占位目录（无业务实现）
-- 实现侧交接单 `docs/project/CURRENT.md`；默认学法「设计课 → 作业本」
-- **架构金科玉律** `docs/ARCHITECTURE_PATTERNS.md`（P1–P8）与 AGENTS 短列表
+- 文档与目录框架、CURRENT、ARCHITECTURE_PATTERNS（P1–P8）
+- **M0**：`mini_core` / `mini_app` / `minigcs`、Application、Main.qml、CMake presets
+- CODING_STYLE 强制版、`.clang-format`
+- 对照笔记 `docs/learning/notes/m0-bootstrap.md`
 
 ### Changed
 
-- M-doc 标为完成；进度/里程碑/AGENTS 与学法同步
-- AGENTS 对齐 QGC 结构：快速链接 / 金律 / Critical / DoD
+- AGENTS 构建命令改为真实 preset；M0 标为完成
 
 ### Fixed
 

@@ -3,39 +3,41 @@
 | 字段 | 值 |
 |------|-----|
 | Source | `src/core/` |
-| CMake target (planned) | `mini_core` |
-| First milestone | M0 |
+| CMake target | `mini_core` |
+| First milestone | **M0** |
+| Patterns | P5（无业务）、P8（日志） |
 
 ## Responsibility
 
-- 跨模块共享的基础类型与工具
-- 日志门面 / 分类 logger 约定
-- 不依赖业务域的错误与通用工具
+- 跨模块共享的基础能力  
+- **分类日志**声明与约定（`mini.*`）  
+- 不依赖业务域的通用工具（按需扩展）  
 
 ## Non-goals
 
-- 不包含链路、飞机、UI
-- 不拉取网络或硬件
+- 链路、飞机、UI、调度组装  
 
 ## Depends on
 
-- Qt Core（按需）、C++ 标准库  
-- **不得**依赖其他 `mini_*` 业务模块
+- Qt Core  
+- **不得**依赖其它 `mini_*` 模块  
 
-## Public concepts (planned)
+## Public API (M0)
 
-- 命名空间 `mini::core`
-- 日志类别前缀 `mini.*`
-- （可选）Result / 错误码风格 — ADR 再定
+| 符号 | 说明 |
+|------|------|
+| `namespace mini::core` | 模块命名空间 |
+| `MiniCoreLog` | 日志 category：`mini.core` |
+| 头文件 `Logging.h` | 声明/定义日志 category 的入口 |
 
-## Threading notes
+## Threading
 
-- 工具函数默认线程安全或明确文档为否
+- 日志 API 遵循 Qt 约定  
 
 ## QGC counterparts
 
-- 分散在 Utilities、日志宏等；Mini 刻意收敛到 `core`
+- Utilities / `QGCLoggingCategory` 等；Mini 收敛到 `core`  
 
-## Open questions
+## Changelog
 
-- 成员命名 `_foo` vs `foo_` — M0 定一种写入 CODING_STYLE
+- M0：落地 `mini_core` + `Logging.h`  

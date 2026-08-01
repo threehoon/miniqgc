@@ -1,12 +1,6 @@
 # qml/
 
-QML 界面资源根目录。
+- **M0**：`Main.qml` 空壳主窗（P4：无协议/socket）  
+- **M1**：页面切换等  
 
-- **现状**：占位  
-- **计划**：M1 增加 `Main.qml` 与页面切换  
-- **原则**：不在此解析 MAVLink 或访问 socket  
-
-子目录预留：
-
-- `Main/` — 根窗口与导航  
-- `Components/` — 可复用控件  
+原则：不在此解析 MAVLink 或访问 socket。

@@ -2,4 +2,4 @@
 
 See [docs/modules/app.md](../../docs/modules/app.md).
 
-No sources yet (M0).
+M0: `Application` composition root (P6), CMake target `mini_app`.
