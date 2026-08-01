@@ -2,8 +2,10 @@
 
 可扩展的迷你地面站（**Mini Ground Control Station**）。
 
-用专业工程方式从零搭建一套「能长期加功能」的 GCS 骨架，并对照 [QGroundControl](https://github.com/mavlink/qgroundcontrol) 学习其架构与领域模型。  
-**目标是学透设计、练会交付；不是做一个功能完整的 QGC 克隆。**
+用专业工程方式从零搭建一套「能长期加功能」的 GCS 骨架，并对照 [QGroundControl](https://github.com/mavlink/qgroundcontrol) 学习其架构与领域模型。
+
+**最终目标**：具备面向客户的 **QGC 二次开发**能力（可维护、可跟版），不是停留在简单 demo。  
+**本仓角色**：同构沙盘——功能体量小于 QGC，但模块边界、调度层、工程纪律按专业项目来；每刀都映射回真 QGC 的扩展点。
 
 | 项 | 说明 |
 |----|------|
