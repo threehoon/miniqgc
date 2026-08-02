@@ -56,10 +56,11 @@
 
 | 项 | 内容 |
 |----|------|
-| Status | `todo` |
-| Goal | `comms` 模块：UDP（优先）收发原始字节；日志可见 |
-| Acceptance | 用 nc/SITL/自写 sender 能看到收包日志 |
-| QGC 对照 | `src/Comms/` |
+| Status | **`done`**（功能 2026-07-31；讲解待学员看完 UI） |
+| Goal | `comms` 模块：UDP 收原始字节；UI 日志可见 |
+| Delivered | `UdpLink`、`LinkView`、顶栏 Link、Application 注入 `udpLink` |
+| Acceptance | Start 后 `nc -u` 能看到 RX 日志 |
+| QGC 对照 | `src/Comms/UDPLink` 等 |
 
 ---
 

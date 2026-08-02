@@ -2,28 +2,27 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-// M1 shell: top-level view switching (P4 — UI only, no MAVLink/sockets).
-// Mental model aligned with QGC MainWindow: Fly/Plan as primary stages;
-// Analyze/Settings as secondary places (simplified — all peer tabs for now).
+// Shell + Link page (M1/M2). P4: UI binds services from Application, no sockets here.
 ApplicationWindow {
     id: root
-    width: 1024
-    height: 640
+    width: 1100
+    height: 700
     visible: true
     title: qsTr("MiniQGC — %1").arg(viewModel.currentTitle)
 
-    // View indices — keep in sync with StackLayout order and nav buttons.
     readonly property int viewFly: 0
     readonly property int viewPlan: 1
-    readonly property int viewAnalyze: 2
-    readonly property int viewSettings: 3
+    readonly property int viewLink: 2
+    readonly property int viewAnalyze: 3
+    readonly property int viewSettings: 4
 
     QtObject {
         id: viewModel
-        property int currentIndex: root.viewFly
+        property int currentIndex: root.viewLink
         readonly property var titles: [
             qsTr("Fly"),
             qsTr("Plan"),
+            qsTr("Link"),
             qsTr("Analyze"),
             qsTr("Settings")
         ]
@@ -37,12 +36,8 @@ ApplicationWindow {
     }
 
     header: ToolBar {
-        id: topBar
         height: 48
-
-        background: Rectangle {
-            color: "#2b2b2b"
-        }
+        background: Rectangle { color: "#2b2b2b" }
 
         RowLayout {
             anchors.fill: parent
@@ -57,18 +52,34 @@ ApplicationWindow {
                 font.pixelSize: 16
             }
 
-            Item {
-                Layout.fillWidth: true
+            // Live link chip in the toolbar
+            Rectangle {
+                radius: 4
+                color: (typeof udpLink !== "undefined" && udpLink.running) ? "#1e3d32" : "#3a3030"
+                implicitHeight: 28
+                implicitWidth: linkChipText.implicitWidth + 16
+                visible: typeof udpLink !== "undefined"
+
+                Label {
+                    id: linkChipText
+                    anchors.centerIn: parent
+                    text: udpLink.running
+                          ? qsTr("UDP :%1").arg(udpLink.localPort)
+                          : qsTr("Link off")
+                    color: udpLink.running ? "#6dcea0" : "#c09090"
+                    font.pixelSize: 12
+                }
             }
 
-            ButtonGroup {
-                id: navGroup
-            }
+            Item { Layout.fillWidth: true }
+
+            ButtonGroup { id: navGroup }
 
             Repeater {
                 model: [
                     { title: qsTr("Fly"), index: root.viewFly },
                     { title: qsTr("Plan"), index: root.viewPlan },
+                    { title: qsTr("Link"), index: root.viewLink },
                     { title: qsTr("Analyze"), index: root.viewAnalyze },
                     { title: qsTr("Settings"), index: root.viewSettings }
                 ]
@@ -98,40 +109,33 @@ ApplicationWindow {
 
     footer: ToolBar {
         height: 28
-        background: Rectangle {
-            color: "#252525"
-        }
+        background: Rectangle { color: "#252525" }
 
         Label {
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
             anchors.leftMargin: 12
-            text: qsTr("View: %1  ·  No vehicle (expected until M4)").arg(viewModel.currentTitle)
+            text: {
+                var linkPart = (typeof udpLink !== "undefined" && udpLink.running)
+                    ? qsTr("UDP :%1 · %2 pkts").arg(udpLink.localPort).arg(udpLink.packetsReceived)
+                    : qsTr("Link stopped")
+                return qsTr("View: %1  ·  %2  ·  No vehicle (until M4)")
+                    .arg(viewModel.currentTitle)
+                    .arg(linkPart)
+            }
             color: "#9a9a9a"
             font.pixelSize: 12
         }
     }
 
     StackLayout {
-        id: stack
         anchors.fill: parent
         currentIndex: viewModel.currentIndex
 
-        FlyView {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-        }
-        PlanView {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-        }
-        AnalyzeView {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-        }
-        SettingsView {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-        }
+        FlyView { Layout.fillWidth: true; Layout.fillHeight: true }
+        PlanView { Layout.fillWidth: true; Layout.fillHeight: true }
+        LinkView { Layout.fillWidth: true; Layout.fillHeight: true }
+        AnalyzeView { Layout.fillWidth: true; Layout.fillHeight: true }
+        SettingsView { Layout.fillWidth: true; Layout.fillHeight: true }
     }
 }

@@ -2,12 +2,12 @@ qt_add_executable(minigcs
     main.cc
 )
 
-# QML lives under repo qml/; aliases keep module-relative names clean.
 set(MINI_QML_DIR "${CMAKE_SOURCE_DIR}/qml")
 set(MINI_QML_FILES
     "${MINI_QML_DIR}/Main.qml"
     "${MINI_QML_DIR}/FlyView.qml"
     "${MINI_QML_DIR}/PlanView.qml"
+    "${MINI_QML_DIR}/LinkView.qml"
     "${MINI_QML_DIR}/AnalyzeView.qml"
     "${MINI_QML_DIR}/SettingsView.qml"
 )

@@ -13,6 +13,7 @@ target_include_directories(mini_app
 target_link_libraries(mini_app
     PUBLIC
         mini_core
+        mini_comms
         Qt6::Core
         Qt6::Gui
         Qt6::Qml

@@ -1,8 +1,9 @@
 #include "Application.h"
 
 #include "Logging.h"
+#include "UdpLink.h"
 
-#include <QtCore/QUrl>
+#include <QtQml/QQmlContext>
 
 namespace mini::app {
 
@@ -20,6 +21,9 @@ bool Application::init()
 {
     qCDebug(MiniAppLog) << "init: starting composition root";
 
+    // P6: create domain services here, not in QML.
+    _udpLink = std::make_unique<mini::comms::UdpLink>();
+
     if (!_loadRootQml()) {
         qCCritical(MiniAppLog) << "init: failed to load root QML";
         return false;
@@ -32,14 +36,21 @@ bool Application::init()
 void Application::shutdown()
 {
     qCDebug(MiniAppLog) << "shutdown";
+    if (_udpLink) {
+        _udpLink->stop();
+    }
     if (_engine) {
         _engine.reset();
     }
+    _udpLink.reset();
 }
 
 bool Application::_loadRootQml()
 {
     _engine = std::make_unique<QQmlApplicationEngine>();
+
+    // Expose link before load so Main.qml bindings resolve (P4: bind, don't own socket).
+    _engine->rootContext()->setContextProperty(QStringLiteral("udpLink"), _udpLink.get());
 
     QObject::connect(
         _engine.get(),
@@ -51,7 +62,6 @@ bool Application::_loadRootQml()
         },
         Qt::QueuedConnection);
 
-    // Module registered by qt_add_qml_module(URI MiniQGC) on the executable target.
     _engine->loadFromModule(u"MiniQGC", u"Main");
 
     if (_engine->rootObjects().isEmpty()) {

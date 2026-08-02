@@ -6,9 +6,9 @@
 
 | 项 | 值 |
 |----|-----|
-| **当前里程碑** | **M1 done** → 下一步 M2 |
-| **整体进度（粗估）** | ~18% |
-| **最近更新** | 2026-07-31 — M1 Shell UI |
+| **当前里程碑** | **M2 done（待学员看界面）** → 讲解后 M3 |
+| **整体进度（粗估）** | ~28% |
+| **最近更新** | 2026-07-31 — M2 Link UDP + UI-first 学法 |
 | **GitHub** | https://github.com/threehoon/miniqgc |
 
 ## Milestone board
@@ -19,16 +19,18 @@
 | Patterns | P1–P8 + CODING_STYLE | **done** |
 | M0 | CMake + 空壳 App | **done** |
 | M1 | Shell UI | **done** |
-| M2 | Comms bytes | todo |
-| M3–M6 | … | todo |
+| M2 | Comms UDP + Link 页 | **done**（待讲解） |
+| M3 | MAVLink | todo |
+| M4–M6 | … | todo |
 
 ## Completed
 
-- [x] 规范 P1–P8 + CODING_STYLE  
-- [x] M0 启动链  
-- [x] M1 四页导航壳（Fly/Plan/Analyze/Settings）  
+- [x] M0 / M1  
+- [x] M2：`mini_comms::UdpLink` + `LinkView` + Application 注入 `udpLink`  
 
 ## Next
 
-- M2 UDP / Link 抽象  
+- 学员看完 Link 页 → 模块讲解  
+- M3 解析 HEARTBEAT  
+
 

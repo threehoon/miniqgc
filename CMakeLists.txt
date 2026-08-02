@@ -17,12 +17,13 @@ set(CMAKE_AUTOUIC ON)
 # Export compile_commands for clangd (optional convenience)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Gui Qml Quick QuickControls2)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core Gui Qml Quick QuickControls2 Network)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
 add_subdirectory(src/core)
+add_subdirectory(src/comms)
 add_subdirectory(src/app)
 add_subdirectory(apps/minigcs)
 
-message(STATUS "MiniQGC ${PROJECT_VERSION} — targets: mini_core, mini_app, minigcs")
+message(STATUS "MiniQGC ${PROJECT_VERSION} — targets: mini_core, mini_comms, mini_app, minigcs")

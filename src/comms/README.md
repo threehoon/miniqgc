@@ -2,4 +2,4 @@
 
 See [docs/modules/comms.md](../../docs/modules/comms.md).
 
-No sources yet (M2).
+M2: `UdpLink` — raw UDP listen / RX log.

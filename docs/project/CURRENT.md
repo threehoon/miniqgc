@@ -1,58 +1,44 @@
 # CURRENT — 实现侧交接单（MiniQGC）
 
-> **在本仓新开对话时先读本文件。**
-
----
-
 ## 一句话状态
 
-**M0 + M1 已完成：启动链 + 主窗四页切换（Fly/Plan/Analyze/Settings 占位）。下一刀倾向 M2 通信（UDP 字节）。**
+**M2 页面与功能已落地（Link 页 + UDP 收包）。协作方式：先出界面/效果 → 你看 → 再讲解模块。请先运行看 Link 页，看完说「看完了」再开讲。**
 
----
+## 协作方式（默认）
 
-## 指针
-
-| 项 | 值 |
-|----|-----|
-| 仓库 | https://github.com/threehoon/miniqgc |
-| 本机 | `/Users/x_hoon/minigcs` |
-| 金律 | `docs/ARCHITECTURE_PATTERNS.md` |
-| 笔记 | `docs/learning/notes/m1-shell-ui.md` |
-
----
+```text
+1. 导师先实现「能看见的效果」
+2. 你本地运行、点一点
+3. 你确认看完
+4. 导师讲：页面功能、实现方式、模块职责、对照 QGC
+```
 
 ## 里程碑
 
 | ID | 状态 |
 |----|------|
-| M0 启动空壳 | ✅ |
-| M1 Shell UI | ✅ |
-| M2 Comms bytes | ⬜ 下一步 |
+| M0 启动 | ✅ |
+| M1 导航壳 | ✅ |
+| M2 Link / UDP | ✅ 待你验收界面 |
+| M3 MAVLink | ⬜ |
 
-### M1 验收
-
-- [x] 顶栏 Fly / Plan / Analyze / Settings  
-- [x] `StackLayout` 切换，标题与底栏同步  
-- [x] 底栏提示无 vehicle（P2）  
-- [x] 构建 + 冒烟加载成功  
-- [x] Fusion 样式避免 macOS 原生控件定制警告  
+## 请你现在做（验收 M2 画面）
 
 ```bash
+cd /Users/x_hoon/minigcs
 cmake --preset macos-qt6 && cmake --build --preset macos-qt6
 ./build/apps/minigcs/MiniQGC.app/Contents/MacOS/MiniQGC
 ```
 
----
+1. 默认进入 **Link** 页（顶栏第 3 个）  
+2. 端口默认 **14550**，点 **Start**  
+3. 另开终端：`echo hello | nc -u -w1 127.0.0.1 14550`  
+4. 看日志区是否出现 RX 行；顶栏/底栏显示 UDP 状态  
 
-## 下一步
+看完回复：**看完了**（或说明哪里不对）。
 
-1. **M2 设计/实现**：`comms` 模块 UDP 收字节 + 日志（仍由 Application 创建接线，P6）  
-2. 可选：把 Analyze/Settings 改成 QGC 式抽屉（非必须）  
-
----
-
-## 最近会话
+## 最近
 
 | 日期 | 内容 |
 |------|------|
-| 2026-07-31 | M1 主窗四页壳 + 文档 |
+| 2026-07-31 | 约定 UI-first 学法；实现 M2 Link+UDP |
