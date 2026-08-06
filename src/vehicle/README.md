@@ -1,5 +1,7 @@
 # src/vehicle
 
-See [docs/modules/vehicle.md](../../docs/modules/vehicle.md).
+Runtime aircraft objects. See [docs/modules/vehicle.md](../../docs/modules/vehicle.md).
 
-No sources yet (M4).
+| Target | `mini_vehicle` |
+|--------|----------------|
+| M4 | `Vehicle` + `VehicleManager` (first-seen single, 5s timeout) |

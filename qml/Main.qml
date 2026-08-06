@@ -71,6 +71,31 @@ ApplicationWindow {
                 }
             }
 
+            // Vehicle chip (P2: null activeVehicle is normal)
+            Rectangle {
+                radius: 4
+                color: (typeof vehicleManager !== "undefined" && vehicleManager.hasVehicle)
+                       ? "#1e3d32" : "#3a3030"
+                implicitHeight: 28
+                implicitWidth: vehicleChipText.implicitWidth + 16
+                visible: typeof vehicleManager !== "undefined"
+
+                Label {
+                    id: vehicleChipText
+                    anchors.centerIn: parent
+                    text: {
+                        if (typeof vehicleManager === "undefined")
+                            return ""
+                        if (!vehicleManager.hasVehicle || !vehicleManager.activeVehicle)
+                            return qsTr("No vehicle")
+                        return qsTr("Vehicle sys=%1").arg(vehicleManager.activeVehicle.sysId)
+                    }
+                    color: (typeof vehicleManager !== "undefined" && vehicleManager.hasVehicle)
+                           ? "#6dcea0" : "#c09090"
+                    font.pixelSize: 12
+                }
+            }
+
             Item { Layout.fillWidth: true }
 
             ButtonGroup { id: navGroup }
@@ -119,9 +144,13 @@ ApplicationWindow {
                 var linkPart = (typeof udpLink !== "undefined" && udpLink.running)
                     ? qsTr("UDP :%1 · %2 pkts").arg(udpLink.localPort).arg(udpLink.packetsReceived)
                     : qsTr("Link stopped")
-                return qsTr("View: %1  ·  %2  ·  No vehicle (until M4)")
+                var vehiclePart = (typeof vehicleManager !== "undefined")
+                    ? vehicleManager.statusText
+                    : qsTr("No vehicle")
+                return qsTr("View: %1  ·  %2  ·  %3")
                     .arg(viewModel.currentTitle)
                     .arg(linkPart)
+                    .arg(vehiclePart)
             }
             color: "#9a9a9a"
             font.pixelSize: 12

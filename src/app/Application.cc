@@ -3,6 +3,7 @@
 #include "Logging.h"
 #include "MavlinkParser.h"
 #include "UdpLink.h"
+#include "VehicleManager.h"
 
 #include <QtQml/QQmlContext>
 
@@ -25,7 +26,8 @@ bool Application::init()
     // P6: create domain services here, not in QML.
     _udpLink = std::make_unique<mini::comms::UdpLink>();
     _mavlinkParser = std::make_unique<mini::mavlink::MavlinkParser>();
-    _wireLinkToParser();
+    _vehicleManager = std::make_unique<mini::vehicle::VehicleManager>();
+    _wireModules();
 
     if (!_loadRootQml()) {
         qCCritical(MiniAppLog) << "init: failed to load root QML";
@@ -42,31 +44,47 @@ void Application::shutdown()
     if (_udpLink) {
         _udpLink->stop();
     }
+    if (_vehicleManager) {
+        _vehicleManager->clear();
+    }
     if (_engine) {
         _engine.reset();
     }
+    _vehicleManager.reset();
     _mavlinkParser.reset();
     _udpLink.reset();
 }
 
-void Application::_wireLinkToParser()
+void Application::_wireModules()
 {
-    // Link owns bytes; parser owns framing. Vehicle (M4) will subscribe to parser signals.
+    // Link → Parser (bytes)
     QObject::connect(_udpLink.get(), &mini::comms::UdpLink::datagramReceived, _mavlinkParser.get(),
                      [this](const QByteArray &data, const QString & /*host*/, quint16 /*port*/) {
                          if (_mavlinkParser) {
                              _mavlinkParser->feed(data);
                          }
                      });
+
+    // Parser → VehicleManager (semantic heartbeat)
+    QObject::connect(_mavlinkParser.get(), &mini::mavlink::MavlinkParser::heartbeatReceived,
+                     _vehicleManager.get(), &mini::vehicle::VehicleManager::handleHeartbeat);
+
+    // Link stop → no vehicle (pipe closed; first-seen lock resets)
+    QObject::connect(_udpLink.get(), &mini::comms::UdpLink::runningChanged, this, [this]() {
+        if (_udpLink && !_udpLink->running() && _vehicleManager) {
+            _vehicleManager->clear();
+        }
+    });
 }
 
 bool Application::_loadRootQml()
 {
     _engine = std::make_unique<QQmlApplicationEngine>();
 
-    // Expose before load so Main.qml bindings resolve (P4: bind, don't own socket/parser).
+    // Expose before load so Main.qml bindings resolve (P4: bind, don't own services).
     _engine->rootContext()->setContextProperty(QStringLiteral("udpLink"), _udpLink.get());
     _engine->rootContext()->setContextProperty(QStringLiteral("mavlinkParser"), _mavlinkParser.get());
+    _engine->rootContext()->setContextProperty(QStringLiteral("vehicleManager"), _vehicleManager.get());
 
     QObject::connect(
         _engine.get(),

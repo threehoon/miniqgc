@@ -81,10 +81,12 @@
 
 | 项 | 内容 |
 |----|------|
-| Status | `todo` |
+| Status | **`done`**（代码 2026-08-06；讲解可随 UI 收口） |
 | Goal | 心跳 → 创建/更新 `Vehicle` |
-| Acceptance | 内存中有明确 Vehicle 生命周期；断开策略有文档 |
-| QGC 对照 | `Vehicle` / MultiVehicle |
+| Delivered | `Vehicle` + `VehicleManager`（first-seen 单机、5s 超时、Link Stop 清空）；Fly/顶栏/底栏；契约与笔记 |
+| Acceptance | 内存中有明确 Vehicle 生命周期；断开策略有文档 — **满足** |
+| QGC 对照 | `Vehicle` / `MultiVehicleManager::activeVehicle` |
+| Notes | `docs/learning/notes/m4-vehicle.md` |
 
 ---
 

@@ -39,10 +39,11 @@
 
 ```text
 Application::init
-  → new UdpLink
-  → new MavlinkParser
-  → connect(datagramReceived → parser.feed)
-  → setContextProperty udpLink / mavlinkParser
+  → new UdpLink, MavlinkParser, VehicleManager
+  → datagramReceived → parser.feed
+  → heartbeatReceived → vehicleManager.handleHeartbeat
+  → link !running → vehicleManager.clear
+  → setContextProperty udpLink / mavlinkParser / vehicleManager
   → load Main.qml
 ```
 
@@ -55,3 +56,5 @@ Application::init
 - M0：`Application` 空壳 + 加载根 QML  
 - M2：创建/注入 `UdpLink`  
 - M3：创建/注入 `MavlinkParser`，接线 `datagramReceived → feed`  
+- M4：创建/注入 `VehicleManager`，接线心跳与 Link Stop  
+

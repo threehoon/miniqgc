@@ -13,6 +13,10 @@ namespace mini::mavlink {
 class MavlinkParser;
 }
 
+namespace mini::vehicle {
+class VehicleManager;
+}
+
 namespace mini::app {
 
 /// Composition root / coordinator (Architecture Pattern P6).
@@ -32,14 +36,16 @@ public:
 
     [[nodiscard]] mini::comms::UdpLink *udpLink() const { return _udpLink.get(); }
     [[nodiscard]] mini::mavlink::MavlinkParser *mavlinkParser() const { return _mavlinkParser.get(); }
+    [[nodiscard]] mini::vehicle::VehicleManager *vehicleManager() const { return _vehicleManager.get(); }
 
 private:
     [[nodiscard]] bool _loadRootQml();
-    void _wireLinkToParser();
+    void _wireModules();
 
     std::unique_ptr<QQmlApplicationEngine> _engine;
     std::unique_ptr<mini::comms::UdpLink> _udpLink;
     std::unique_ptr<mini::mavlink::MavlinkParser> _mavlinkParser;
+    std::unique_ptr<mini::vehicle::VehicleManager> _vehicleManager;
 };
 
 } // namespace mini::app

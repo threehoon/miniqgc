@@ -15,6 +15,7 @@ target_link_libraries(mini_app
         mini_core
         mini_comms
         mini_mavlink
+        mini_vehicle
         Qt6::Core
         Qt6::Gui
         Qt6::Qml

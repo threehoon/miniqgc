@@ -36,3 +36,16 @@
 - Link 页双栏（RX / HEARTBEAT）、Analyze 共用 parser
 - 离线 feed 自测：`msgs=1 hb=1 sys=1 type=2 ap=12`
 - **下次**：学员看 UI → 讲设计；然后 M4 Vehicle
+
+## 2026-08-06 — M4 Vehicle
+
+- 策略：first-seen 单机；5s 超时；Link Stop clear；其它 sysid 忽略
+- `Vehicle` + `VehicleManager`；heartbeatReceived → handleHeartbeat
+- Fly 页 / 顶栏 chip / 底栏 statusText；P2 判空
+- **会话收口**：两边 CURRENT 更新；M4 commit；新对话从 M5/SerialLink 开
+
+## 2026-08-06 — 会话结束交接
+
+- 学员已验证 M3 HB 日志；M4 代码已落地并构建通过
+- 学习记录写入 CURRENT（实现侧 + 设计课侧）
+- **新对话**：复制 CURRENT 中的开场提示即可接上
