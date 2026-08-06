@@ -4,37 +4,47 @@
 |------|-----|
 | Source | `src/app/` |
 | CMake target | `mini_app` |
-| First milestone | **M0** |
+| First milestone | **M0**（接线随 M2/M3 扩展） |
 | Patterns | **P6 调度层**、P4（加载 QML）、P5、P8 |
 
 ## Responsibility
 
 - 应用生命周期：`init` / `exec` / `shutdown`  
-- **调度 / 组装根**（P6）：后续创建并接线 comms/vehicle…  
+- **调度 / 组装根**（P6）：创建并接线 domain 模块  
 - 加载根 QML、持有 `QQmlApplicationEngine`  
+- 向 QML 注入 context property（`udpLink`、`mavlinkParser`…）  
 
 ## Non-goals
 
-- 协议解析、socket IO、飞控业务算法  
+- 协议算法细节（在 `mavlink`）  
+- socket IO 实现（在 `comms`）  
+- 飞控业务状态机（在 `vehicle`，M4）  
 
 ## Depends on
 
-- `mini_core`  
+- `mini_core`、`mini_comms`、`mini_mavlink`  
 - Qt：Gui、Qml、Quick  
-- M0 **不**链接 comms/vehicle（尚未实现）  
 
-## Public API (M0)
+## Public API
 
 | 符号 | 说明 |
 |------|------|
 | `mini::app::Application` | 继承 `QGuiApplication`；组装根 |
-| `init()` | 加载根界面；失败返回 false |
+| `init()` | 创建服务、接线、加载根界面 |
 | `shutdown()` | 有序清理 |
+| `udpLink()` / `mavlinkParser()` | 已创建服务访问 |
 | 日志 | `MiniAppLog` → `mini.app` |
 
-## Threading
+## Wiring (current)
 
-- 构造与 `init` 在 GUI 线程  
+```text
+Application::init
+  → new UdpLink
+  → new MavlinkParser
+  → connect(datagramReceived → parser.feed)
+  → setContextProperty udpLink / mavlinkParser
+  → load Main.qml
+```
 
 ## QGC counterparts
 
@@ -42,4 +52,6 @@
 
 ## Changelog
 
-- M0：`Application` 空壳 + 加载 `qrc:/qt/qml/MiniQGC/Main.qml` 或等价根 QML  
+- M0：`Application` 空壳 + 加载根 QML  
+- M2：创建/注入 `UdpLink`  
+- M3：创建/注入 `MavlinkParser`，接线 `datagramReceived → feed`  

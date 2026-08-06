@@ -6,7 +6,8 @@
 
 ## 一句话状态
 
-**M0 启动 + M1 导航壳 + M2 UDP Link 已完成；概念上已对齐「Link = 管道、串口/UDP 同级、非图传」。下一轮建议 M3 MAVLink 解析（或补 SerialLink）。**
+**M0–M3 已实现：启动壳 + 导航 + UdpLink + MAVLink HEARTBEAT 解析。**  
+下一轮建议 **M4 Vehicle**（或补 SerialLink）。学员侧：先跑通 Link 页心跳，再讲本轮设计。
 
 ---
 
@@ -15,10 +16,11 @@
 | 顺序 | 文件 | 内容 |
 |------|------|------|
 | 1 | **本文件** | 进度与下一步 |
-| 2 | [../learning/notes/m2-link-udp.md](../learning/notes/m2-link-udp.md) | Link/UDP/串口/图传对照（本轮核心） |
-| 3 | [../ARCHITECTURE_PATTERNS.md](../ARCHITECTURE_PATTERNS.md) | 金科玉律 P1–P8 |
-| 4 | [../../AGENTS.md](../../AGENTS.md) | Agent 总约定 |
-| 5 | 设计课 CURRENT | `/Users/x_hoon/qgc_project/docs/learning/CURRENT.md` |
+| 2 | [../learning/notes/m3-mavlink-parse.md](../learning/notes/m3-mavlink-parse.md) | M3 概念（本轮） |
+| 3 | [../learning/notes/m2-link-udp.md](../learning/notes/m2-link-udp.md) | Link 管道（前序） |
+| 4 | [../decisions/0001-mavlink-library-choice.md](../decisions/0001-mavlink-library-choice.md) | 官方 mavlink 头 |
+| 5 | [../ARCHITECTURE_PATTERNS.md](../ARCHITECTURE_PATTERNS.md) | 金科玉律 P1–P8 |
+| 6 | 设计课 CURRENT | `/Users/x_hoon/qgc_project/docs/learning/CURRENT.md` |
 
 ---
 
@@ -41,9 +43,6 @@
 ④ 再讲：功能 → 实现 → 模块 → 对照 QGC
 ```
 
-学法总原则仍是：设计课（qgc 仓）→ 作业本（本仓）→ 收口。  
-目标：服务 **QGC 客户向二次开发**，不是 demo 玩具。
-
 ---
 
 ## 里程碑看板
@@ -53,21 +52,21 @@
 | M-doc / Patterns | 文档 + P1–P8 | ✅ |
 | M0 | main → Application → 窗口 | ✅ |
 | M1 | 顶栏导航多页壳 | ✅ |
-| M2 | `UdpLink` + Link 页 + 概念对齐 | ✅ |
-| M3 | MAVLink（至少 HEARTBEAT） | ⬜ **建议下一轮** |
-| M4 | Vehicle 对象 | ⬜ |
-| — | SerialLink（真机串口） | ⬜ 可与 M3 后或并行 |
+| M2 | `UdpLink` + Link 页 | ✅ |
+| M3 | `MavlinkParser` + HEARTBEAT UI | ✅ **本轮交付代码** |
+| M4 | Vehicle 对象 | ⬜ **建议下一轮** |
+| — | SerialLink | ⬜ 可并行 |
 
 ---
 
 ## 已建立的关键心智（勿回退）
 
-1. **M0** = 启动流程（main 瘦，Application 调度根）  
-2. **M1** = 顶栏导航切页（Fly/Plan/Link/Analyze/Settings）  
-3. **Link** = 收发字节的管道；`start` 打开管道 ≠ 已有飞机  
-4. **UDP** = 网络管道（仿真、Wi‑Fi 遥测等）；**不是**默认图传  
-5. **SerialLink** = 同级串口管道（USB/数传呈串口）；Mini 未实现  
-6. **图传** = 另一条业务线，与遥测 Link 分离  
+1. **Link** = 字节管道；Start ≠ 有飞机  
+2. **Parser** = 字节 → 消息语义；不碰 socket  
+3. **HEARTBEAT** = 「有飞控在说话」；还不是 Vehicle  
+4. **QML 只绑定** `udpLink` / `mavlinkParser`；禁止 UI 拆帧  
+5. **Application** 负责创建与接线（P6）  
+6. **官方 mavlink 头**（长期、可跟 QGC）  
 
 ---
 
@@ -80,18 +79,21 @@ cmake --build --preset macos-qt6
 ./build/apps/minigcs/MiniQGC.app/Contents/MacOS/MiniQGC
 ```
 
-Qt 路径在 `CMakePresets.json` 的 `macos-qt6` 中，换机器需改或设 `CMAKE_PREFIX_PATH`。
+自测心跳（需 pymavlink，建议 venv）：
 
-Link 页自测：Start → `echo hello | nc -u -w1 127.0.0.1 14550` → 看 RX 日志。
+```bash
+python3 -m venv .venv && .venv/bin/pip install pymavlink
+# App Link 页 → Start 后：
+.venv/bin/python3 tools/send_heartbeat.py 127.0.0.1 14550 5
+```
 
 ---
 
-## 下一轮学习建议（给新对话 AI）
+## 下一轮学习建议
 
-1. 读本 CURRENT + `m2-link-udp.md`  
-2. 与学员确认下一刀：**M3 解析** 或 **SerialLink**  
-3. 仍 UI-first：先能看见效果，再讲模块  
-4. 遵守 P4/P5/P6：解析不在 QML；Link 由 Application 创建  
+1. 学员确认 M3 UI 看懂（Link 左右两栏）  
+2. **M4**：`heartbeatReceived` → `Vehicle` 生命周期  
+3. 仍 UI-first；遵守 P2（Vehicle 可空）  
 
 ---
 
@@ -99,5 +101,6 @@ Link 页自测：Start → `echo hello | nc -u -w1 127.0.0.1 14550` → 看 RX �
 
 | 日期 | 内容 |
 |------|------|
-| 2026-07-31 | M0–M2 实现；UI-first 学法 |
-| 2026-08-03 | 讲清串口/UDP/图传；UdpLink↔SerialLink 对照；**文档交接更新备新对话** |
+| 2026-07-31 | M0–M2 实现 |
+| 2026-08-03 | 串口/UDP/图传概念；交接 |
+| 2026-08-06 | **M3**：ADR 0001 + MavlinkParser + Link/Analyze 心跳 UI；离线 feed 自测通过 |

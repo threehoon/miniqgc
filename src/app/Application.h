@@ -9,6 +9,10 @@ namespace mini::comms {
 class UdpLink;
 }
 
+namespace mini::mavlink {
+class MavlinkParser;
+}
+
 namespace mini::app {
 
 /// Composition root / coordinator (Architecture Pattern P6).
@@ -27,12 +31,15 @@ public:
     void shutdown();
 
     [[nodiscard]] mini::comms::UdpLink *udpLink() const { return _udpLink.get(); }
+    [[nodiscard]] mini::mavlink::MavlinkParser *mavlinkParser() const { return _mavlinkParser.get(); }
 
 private:
     [[nodiscard]] bool _loadRootQml();
+    void _wireLinkToParser();
 
     std::unique_ptr<QQmlApplicationEngine> _engine;
     std::unique_ptr<mini::comms::UdpLink> _udpLink;
+    std::unique_ptr<mini::mavlink::MavlinkParser> _mavlinkParser;
 };
 
 } // namespace mini::app

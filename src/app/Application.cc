@@ -1,6 +1,7 @@
 #include "Application.h"
 
 #include "Logging.h"
+#include "MavlinkParser.h"
 #include "UdpLink.h"
 
 #include <QtQml/QQmlContext>
@@ -23,6 +24,8 @@ bool Application::init()
 
     // P6: create domain services here, not in QML.
     _udpLink = std::make_unique<mini::comms::UdpLink>();
+    _mavlinkParser = std::make_unique<mini::mavlink::MavlinkParser>();
+    _wireLinkToParser();
 
     if (!_loadRootQml()) {
         qCCritical(MiniAppLog) << "init: failed to load root QML";
@@ -42,15 +45,28 @@ void Application::shutdown()
     if (_engine) {
         _engine.reset();
     }
+    _mavlinkParser.reset();
     _udpLink.reset();
+}
+
+void Application::_wireLinkToParser()
+{
+    // Link owns bytes; parser owns framing. Vehicle (M4) will subscribe to parser signals.
+    QObject::connect(_udpLink.get(), &mini::comms::UdpLink::datagramReceived, _mavlinkParser.get(),
+                     [this](const QByteArray &data, const QString & /*host*/, quint16 /*port*/) {
+                         if (_mavlinkParser) {
+                             _mavlinkParser->feed(data);
+                         }
+                     });
 }
 
 bool Application::_loadRootQml()
 {
     _engine = std::make_unique<QQmlApplicationEngine>();
 
-    // Expose link before load so Main.qml bindings resolve (P4: bind, don't own socket).
+    // Expose before load so Main.qml bindings resolve (P4: bind, don't own socket/parser).
     _engine->rootContext()->setContextProperty(QStringLiteral("udpLink"), _udpLink.get());
+    _engine->rootContext()->setContextProperty(QStringLiteral("mavlinkParser"), _mavlinkParser.get());
 
     QObject::connect(
         _engine.get(),

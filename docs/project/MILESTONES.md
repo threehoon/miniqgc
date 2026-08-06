@@ -68,10 +68,12 @@
 
 | 项 | 内容 |
 |----|------|
-| Status | `todo` |
+| Status | **`done`**（代码 2026-08-06；讲解待学员看完 UI） |
 | Goal | 解析至少 HEARTBEAT |
-| Acceptance | 日志或结构体中打印 sysid/compid/type/autopilot |
-| QGC 对照 | MAVLink 处理路径 |
+| Delivered | ADR 0001（`c_library_v2`）、`MavlinkParser`、Application 接线、`LinkView`/`AnalyzeView`、`tools/send_heartbeat.py` |
+| Acceptance | 日志或结构体中打印 sysid/compid/type/autopilot — **满足**（离线 feed 自测 + UI 日志） |
+| QGC 对照 | `MAVLinkLib.h` / `MAVLinkProtocol` / Vehicle 消费 `messageReceived` |
+| Notes | `docs/learning/notes/m3-mavlink-parse.md` |
 
 ---
 

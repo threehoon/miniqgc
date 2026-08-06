@@ -14,6 +14,7 @@ target_link_libraries(mini_app
     PUBLIC
         mini_core
         mini_comms
+        mini_mavlink
         Qt6::Core
         Qt6::Gui
         Qt6::Qml

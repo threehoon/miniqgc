@@ -17,6 +17,6 @@
 
 | ID | 标题 | 状态 |
 |----|------|------|
-| — | （尚无正式 ADR） | — |
+| [0001](0001-mavlink-library-choice.md) | Official MAVLink C headers (`c_library_v2`) | accepted |
 
 脚手架阶段的默认选择写在 `architecture.md`；**有争议或难撤销的决定**再升格为 ADR。

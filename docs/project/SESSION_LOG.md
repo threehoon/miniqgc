@@ -28,3 +28,11 @@
 - 讲清：串口 USB、UDP/Wi‑Fi 遥测、≠ 图传；UdpLink↔SerialLink 对照
 - 文档：`m2-link-udp.md`、comms 契约、两边 CURRENT/PROGRESS
 - **下次新对话**：建议 M3 MAVLink 或 SerialLink
+
+## 2026-08-06 — M3 MAVLink 解析
+
+- ADR 0001：官方 `mavlink/c_library_v2`
+- `MavlinkParser` + Application `datagramReceived → feed`
+- Link 页双栏（RX / HEARTBEAT）、Analyze 共用 parser
+- 离线 feed 自测：`msgs=1 hb=1 sys=1 type=2 ap=12`
+- **下次**：学员看 UI → 讲设计；然后 M4 Vehicle
