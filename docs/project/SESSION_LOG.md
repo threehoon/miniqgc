@@ -17,3 +17,14 @@
 - **完成**：CURRENT.md、AGENTS/learning/project 文档同步；M-doc 标 done
 - **未做**：M0 设计课与实现
 - **下次**：在 qgc_project 开 M0 设计课
+
+## 2026-07-31 ~ 08-01 — M0 / M1 / M2 实现
+
+- M0 启动链；M1 导航壳；M2 UdpLink + Link 页
+- UI-first：先效果后讲解
+
+## 2026-08-03 — 链路概念收口 + 新对话交接
+
+- 讲清：串口 USB、UDP/Wi‑Fi 遥测、≠ 图传；UdpLink↔SerialLink 对照
+- 文档：`m2-link-udp.md`、comms 契约、两边 CURRENT/PROGRESS
+- **下次新对话**：建议 M3 MAVLink 或 SerialLink

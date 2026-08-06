@@ -7,14 +7,14 @@
 
 ### Added
 
-- 规范与 M0 启动链（见历史）
-- **M1**：Fly/Plan/Analyze/Settings 顶栏切换 + 占位页
-- 笔记 `m1-shell-ui.md`；`docs/modules/ui.md`
-- `QQuickStyle::Fusion` 避免 macOS 原生控件定制警告
+- M0–M2 实现与规范（见历史）
+- **M2 概念笔记** `docs/learning/notes/m2-link-udp.md`（串口/UDP/图传/SerialLink 对照）
+- 新对话交接强化：`docs/project/CURRENT.md`
 
 ### Changed
 
-- `Main.qml` 从 M0 单页升级为导航壳
+- `docs/modules/comms.md` 补充 Serial 规划与 Link 语义
+- 进度标 M2 done；下一刀 M3 / SerialLink
 
 ### Fixed
 

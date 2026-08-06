@@ -30,6 +30,7 @@
 | [PLAN.md](PLAN.md) | 与设计课阶段对照 |
 | [PROGRESS.md](PROGRESS.md) | 对照理解程度（学到了什么） |
 | [notes/](notes/) | 实现后的对照笔记 |
+| [notes/m2-link-udp.md](notes/m2-link-udp.md) | **M2 链路概念（串口/UDP/Serial）** |
 
 ## 口令
 

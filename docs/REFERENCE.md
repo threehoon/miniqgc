@@ -34,7 +34,7 @@ Mini-side learning progress: [learning/](learning/).
 |----------------|--------|-----------------------------------------------|
 | **M0** Scaffold build | App starts | `src/main.cc`, `src/QGCApplication.*`, root `CMakeLists.txt` |
 | **M1** Shell UI | Window + page switch | `src/MainWindow/MainWindow.qml`, `src/FlyView/`, `src/PlanView/` |
-| **M2** Link bytes | UDP/serial IO | `src/Comms/` (`LinkManager`, `UDPLink`, `SerialLink`, …) |
+| **M2** Link bytes | UDP 已实现；Serial 同级概念已文档化 | `src/Comms/`（`UDPLink`, `SerialLink`, `LinkManager`, …）；笔记 `docs/learning/notes/m2-link-udp.md` |
 | **M3** MAVLink parse | HEARTBEAT etc. | `src/MAVLink/`, message handling near vehicle |
 | **M4** Vehicle object | One vehicle exists | `src/Vehicle/Vehicle.*`, multi-vehicle manager |
 | **M5** Bind UI | Show mode/connected | Fly view QML + vehicle properties |

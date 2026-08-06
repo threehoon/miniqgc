@@ -5,12 +5,12 @@
 
 | 主题 | 理解程度 | 笔记 |
 |------|----------|------|
-| 默认学法：设计课 → 作业本 | 已定 | 设计课 CURRENT |
-| 项目文档 / 模块契约框架 | 已就位 | docs/modules |
-| QGC 启动链 | 曾在 QGC 仓带读 | qgc `notes/01-bootstrap.md` |
-| M0 自己落地 | 未开始 | — |
-| Comms / Vehicle / Fact | 未在本仓对照完成 | — |
+| 学法 / 规范 P1–P8 | 已定 | AGENTS / ARCHITECTURE_PATTERNS |
+| M0 启动链 | 已理解（界面启动流程） | notes/m0-bootstrap.md |
+| M1 导航壳 | 已理解（顶栏切页） | notes/m1-shell-ui.md |
+| M2 Link / UDP / 串口 / 非图传 | **已理解大意** | **notes/m2-link-udp.md** |
+| MAVLink / Vehicle / Fact | 未开始 | — |
 
 ## 最近
 
-- 2026-07-31：学法同步到本仓；实现交接单 `docs/project/CURRENT.md` 上线。
+- 2026-08-03：M2 概念收口；交接文档备新对话。
